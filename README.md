@@ -28,11 +28,29 @@ After refactoring the code, I verified that the software remained functional and
 ## Professional Application
 This assignment demonstrates practical skills in identifying vulnerabilities, applying secure coding practices, and implementing cryptographic techniques. Future employers could see this project as evidence of my ability to enhance software security while maintaining functionality and reliability.
 
-## Example: SHA-256 Hashing in Python
-```python
-import hashlib
+## Example: SHA-256 Hashing in Java
+```java
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
-data = "SensitiveInformation"
-hashed_data = hashlib.sha256(data.encode()).hexdigest()
+public class SHA256Example {
+    public static void main(String[] args) {
+        try {
+            String data = "SensitiveInformation";
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(data.getBytes("UTF-8"));
 
-print(f"SHA-256 Hash: {hashed_data}")
+            // Convert bytes to hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            System.out.println("SHA-256 Hash: " + hexString.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
